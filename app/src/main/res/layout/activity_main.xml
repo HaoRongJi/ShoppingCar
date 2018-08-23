@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/back_img"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_arrow_back_black_24dp"/>
+
+        <EditText
+            android:id="@+id/search_et"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/et_bg_shape"
+            android:hint="请输入想搜索的商品"
+            />
+
+        <Button
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击搜索"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="最近搜索"
+            android:layout_marginLeft="20dp"
+            />
+
+        <com.example.library.AutoFlowLayout
+            android:id="@+id/con_fl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+        </com.example.library.AutoFlowLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="火热商品"
+            android:layout_marginLeft="20dp"
+            />
+
+        <com.example.library.AutoFlowLayout
+            android:id="@+id/con_fl2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        </com.example.library.AutoFlowLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
