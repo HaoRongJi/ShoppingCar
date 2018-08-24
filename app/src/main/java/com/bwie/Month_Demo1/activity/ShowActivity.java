@@ -18,14 +18,14 @@ import com.bwie.Month_Demo1.view.IshowView;
 import java.util.HashMap;
 import java.util.List;
 
-public class ShowActivity extends AppCompatActivity implements View.OnClickListener,IshowView {
+public class ShowActivity extends AppCompatActivity implements View.OnClickListener, IshowView {
 
     private RecyclerView searchRv;
     private ImageView classesImg;
     private ImageView back1Img;
     private String content;
     private ShowPresenter showPresenter;
-    private int i=0;
+    private int i = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +41,14 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initData() {
-        Intent intent=getIntent();
-        content = intent.getStringExtra("s1");
-        showPresenter=new ShowPresenter(this);
-        HashMap<String,String> params=new HashMap<>();
-        params.put("keywords",content+"");
-        showPresenter.showData(params);
-
-
-
         back1Img.setOnClickListener(this);
-
+        Intent intent = getIntent();
+        content = intent.getStringExtra("s1");
+        showPresenter = new ShowPresenter(this);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("keywords", content + "");
+        showPresenter.showData(params);
+        classesImg.setOnClickListener(this);
 
 
     }
@@ -66,18 +63,18 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.back1_img:
                 finish();
                 break;
 
             case R.id.classes_img:
-                if (i%2==0){
-                    searchRv.setLayoutManager(new LinearLayoutManager(ShowActivity.this));
+                if (i % 2 == 1) {
+                    searchRv.setLayoutManager(new GridLayoutManager(ShowActivity.this, 2));
                     i++;
-                }else{
-                    searchRv.setLayoutManager(new GridLayoutManager(ShowActivity.this,2));
+                } else {
+                    searchRv.setLayoutManager(new LinearLayoutManager(ShowActivity.this));
                     i++;
                 }
                 break;
@@ -94,16 +91,18 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
     public void success(final List<ProductBean.DataBean> productBean) {
         searchRv.setLayoutManager(new LinearLayoutManager(ShowActivity.this));
 
-        ShowAdapter showAdapter = new ShowAdapter(ShowActivity.this,productBean);
+        ShowAdapter showAdapter = new ShowAdapter(ShowActivity.this, productBean);
+
         searchRv.setAdapter(showAdapter);
         showAdapter.setOnItemClickListener(new ShowAdapter.OnItemClickListener() {
             @Override
             public void OnItemClickListener(int position) {
                 String detailUrl = productBean.get(position).getDetailUrl();
+                //int sellerid = productBean.get(position).getSellerid();
                 int pid = productBean.get(position).getPid();
-                Intent intent = new Intent(ShowActivity.this,DetailsActivity.class);
-                intent.putExtra("detailUrl",detailUrl);
-                intent.putExtra("pid",pid);
+                Intent intent = new Intent(ShowActivity.this, DetailsActivity.class);
+                intent.putExtra("detailUrl", detailUrl);
+                intent.putExtra("pid", pid);
                 startActivity(intent);
             }
         });
@@ -119,7 +118,7 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (showPresenter!=null){
+        if (showPresenter != null) {
 
             showPresenter.detachView();
 
